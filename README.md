@@ -48,6 +48,15 @@ ln -sfn /path/to/my-codex-skills/skills /home/$USER/.agents/skills
 
 项目专属 Skill 放在对应项目的 `.agents/skills/`，不要复制全局 Skill。
 
+在项目根目录直接创建项目 Skill：
+
+```bash
+cd /path/to/project
+create-skill-tree --project-skill my-project-skill
+```
+
+命令会自动在当前目录的下一级创建 `.agents/skills/my-project-skill/`。也可以用 `--project /path/to/project` 为指定项目创建 Skill。
+
 ## 校验
 
 ```bash

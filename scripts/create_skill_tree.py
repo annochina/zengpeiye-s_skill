@@ -87,7 +87,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--project",
         type=Path,
-        help="create project-specific skills under PROJECT/.agents/skills",
+        help="create project-specific skills under PROJECT/.agents/skills (default: current directory)",
     )
     parser.add_argument(
         "--project-skill",
@@ -215,19 +215,17 @@ def create_project_skills(
 def main() -> int:
     args = parse_args()
     try:
-        if args.project is not None:
+        if args.project is not None or args.project_skill:
             if args.target is not None:
-                raise ValueError("do not combine a shared target with --project")
+                raise ValueError("do not combine a shared target with project skill creation")
+            project = (args.project or Path.cwd()).expanduser().resolve()
             return create_project_skills(
-                args.project.expanduser().resolve(),
+                project,
                 args.project_skill,
                 args.force,
                 args.directories_only,
                 args.dry_run,
             )
-
-        if args.project_skill:
-            raise ValueError("--project-skill requires --project")
 
         target = (args.target or DEFAULT_TARGET).expanduser().resolve()
         return create_shared_tree(

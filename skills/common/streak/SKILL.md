@@ -44,3 +44,13 @@ For multiple modifications on the same date, keep one date heading and append ad
 - If validation fails, record the failure honestly and mark the challenge incomplete or continuing.
 
 When handing off work, report the date entry and the current streak only when it can be derived directly from `CHANGELOG.md`.
+
+## Project Skill placement
+
+When creating a project-specific Skill, run the generator from the project root:
+
+```bash
+create-skill-tree --project-skill robot-car
+```
+
+The command uses the current directory automatically and creates the Skill one level below it at `./.agents/skills/robot-car/`. Use `--project /path/to/project` when creating a Skill for a different project.

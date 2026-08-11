@@ -17,3 +17,6 @@
 - Changes: 新增 `scripts/bootstrap.sh`，负责全局软链接、Codex 兼容路径、维护命令和 shell PATH 初始化。
 - Validation: `bash -n scripts/bootstrap.sh` 通过；临时 home 首次/重复部署通过；当前机器 `--no-shell-config` 部署通过；23 个 Skill 目录和 `git diff --check` 通过。
 - Next: 每次后续 Skill、配置或脚本修改都在当天条目下追加挑战结果。
+- Challenge: 让项目创建 Skill 时不必重复输入项目路径。
+- Changes: `create-skill-tree --project-skill NAME` 现在默认使用当前目录，并在当前目录下自动创建 `.agents/skills/NAME/`；保留 `--project` 作为指定其他项目的选项。
+- Validation: 当前目录创建、指定 `--project` 创建、命令帮助、23 个 Skill 元数据校验和 `git diff --check` 均通过。
