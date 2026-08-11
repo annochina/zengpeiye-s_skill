@@ -30,6 +30,7 @@ ln -sfn /path/to/my-codex-skills/skills /home/$USER/.agents/skills
 ## Skill 分类
 
 - `common/`：架构探索、Bug 定位、影响分析、代码审查、重构、测试生成、Git 工作流等。
+- `common/streak/`：维护按本地日期记录的每日 challenge 和连续 streak。
 - `domain/`：ROS1、ROS2、导航、录制、LeRobot 数据集、训练、策略和部署。
 - `project/`：机器人车、BLDC 控制器、Tracker 等项目类模板。
 
@@ -44,3 +45,7 @@ find skills -type f -name SKILL.md -exec dirname {} \; \
 ```
 
 修改后提交前，先检查完整 diff 和校验结果，再进行 Git 提交与推送。
+
+## Daily Challenge Log
+
+每次修改仓库内容都必须同步更新根目录的 [`CHANGELOG.md`](CHANGELOG.md)。同一天使用同一个日期标题追加记录，不要创建重复日期标题。

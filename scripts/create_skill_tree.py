@@ -19,6 +19,7 @@ SHARED_SKILL_TREE = {
         "embedded-debug",
         "git-workflow",
         "refactor",
+        "streak",
         "test-generation",
     ),
     "domain": (

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Streak"
+  short_description: "Maintain a daily Codex challenge streak"
+  default_prompt: "Use $streak to record today’s challenge and update the daily challenge log."
