@@ -70,6 +70,12 @@ create-skill-tree --project /path/to/project
 create-skill-tree --shared
 ```
 
+默认会在当前项目下创建 `.agents/skills/common/` 和 `.agents/skills/domain/`。如果确实要写入机器级全局库，请显式指定全局路径：
+
+```bash
+create-skill-tree --shared ~/.agents/skills
+```
+
 ## 校验
 
 ```bash

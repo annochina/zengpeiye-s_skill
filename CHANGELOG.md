@@ -26,3 +26,6 @@
 - Challenge: 让项目根目录直接执行 `create-skill-tree` 就能创建项目 Skill。
 - Changes: 默认模式改为使用当前目录创建项目 Skill；新增 `--shared` 用于创建或更新全局共享 Skill 库；自动去除 `-master_delivery` 等发布后缀并规范化名称。
 - Validation: 默认项目模式、`--shared` 模式、`observationguilite-master_delivery` 后缀清理、23 个 Skill 元数据校验和 `git diff --check` 均通过。
+- Challenge: 让 `--shared` 生成的 Skill 树也位于当前项目目录内。
+- Changes: `create-skill-tree --shared` 默认改为当前项目的 `.agents/skills/`；需要更新机器级全局库时可显式传入 `~/.agents/skills`。
+- Validation: 当前项目路径、显式全局路径、项目 Skill 发现路径、两套生成脚本语法、23 个 Skill 元数据校验和 `git diff --check` 均通过。

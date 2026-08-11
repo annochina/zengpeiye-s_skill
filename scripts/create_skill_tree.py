@@ -35,7 +35,7 @@ SHARED_SKILL_TREE = {
     ),
 }
 
-DEFAULT_TARGET = Path.home() / ".agents" / "skills"
+DEFAULT_SHARED_TARGET = Path(".agents") / "skills"
 SKILL_NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 PROJECT_RELEASE_SUFFIX_PATTERN = re.compile(
     r"[-_]master[-_]delivery$", re.IGNORECASE
@@ -85,7 +85,7 @@ def parse_args() -> argparse.Namespace:
         nargs="?",
         type=Path,
         default=None,
-        help=f"shared skill destination when --shared is used (default: {DEFAULT_TARGET})",
+        help="shared skill destination when --shared is used (default: current project/.agents/skills)",
     )
     parser.add_argument(
         "--shared",
@@ -240,7 +240,9 @@ def main() -> int:
         if args.shared:
             if args.project is not None or args.project_skill:
                 raise ValueError("do not combine --shared with project Skill options")
-            target = (args.target or DEFAULT_TARGET).expanduser().resolve()
+            target = (
+                args.target or Path.cwd() / DEFAULT_SHARED_TARGET
+            ).expanduser().resolve()
             return create_shared_tree(
                 target,
                 args.force,
