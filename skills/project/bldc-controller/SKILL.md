@@ -1,20 +1,20 @@
 ---
 name: bldc-controller
-description: Starter project-specific skill for Bldc Controller. Use when Codex needs the workflows, conventions, or references maintained for bldc-controller.
+description: BLDC 控制器项目的起始 Skill。需要维护 bldc-controller 的项目约定、控制流程、硬件接口或验证流程时使用。
 ---
 
-# Bldc Controller
+# BLDC 控制器
 
-Replace this starter content with the reusable instructions for the `bldc-controller` skill.
+将此模板替换为 bldc-controller 项目的专属说明。
 
-## Scope
+## 范围
 
-- Category: `project`
-- Purpose: Describe what this skill knows or automates.
-- Triggers: List the user requests that should activate this skill.
+- 分类：project
+- 用途：描述项目结构、控制算法、硬件边界、构建和测试约定。
+- 触发条件：列出应激活此 Skill 的用户请求。
 
-## Workflow
+## 工作流
 
-1. Add the normal workflow for this skill.
-2. Add validation or safety checks.
-3. Link directly to any files in `references/`, `scripts/`, or `assets/` when they are needed.
+1. 补充项目的标准开发、调试和发布流程。
+2. 添加硬件、实时性、安全和验证检查。
+3. 需要时链接 references、scripts 或 assets 中的资源。

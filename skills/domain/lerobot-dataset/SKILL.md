@@ -1,20 +1,20 @@
 ---
 name: lerobot-dataset
-description: Starter technical-domain skill for Lerobot Dataset. Use when Codex needs the workflows, conventions, or references maintained for lerobot-dataset.
+description: LeRobot 数据集领域的起始 Skill。需要维护数据采集、数据格式、校验、转换或数据集发布相关工作流时使用。
 ---
 
-# Lerobot Dataset
+# LeRobot 数据集
 
-Replace this starter content with the reusable instructions for the `lerobot-dataset` skill.
+将此模板替换为 lerobot-dataset Skill 的项目或团队专属说明。
 
-## Scope
+## 范围
 
-- Category: `domain`
-- Purpose: Describe what this skill knows or automates.
-- Triggers: List the user requests that should activate this skill.
+- 分类：domain
+- 用途：描述数据集格式、采集流程、转换脚本和校验规则。
+- 触发条件：列出应激活此 Skill 的用户请求。
 
-## Workflow
+## 工作流
 
-1. Add the normal workflow for this skill.
-2. Add validation or safety checks.
-3. Link directly to any files in `references/`, `scripts/`, or `assets/` when they are needed.
+1. 补充数据集相关的标准工作流。
+2. 添加数据完整性、格式和安全检查。
+3. 需要时链接 references、scripts 或 assets 中的资源。

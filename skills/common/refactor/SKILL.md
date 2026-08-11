@@ -1,26 +1,26 @@
 ---
 name: refactor
-description: Perform safe behavior-preserving refactors such as renaming symbols, extracting functions, moving modules, simplifying structure, or removing verified dead code. Use when code organization should improve without intentionally changing externally observable behavior.
+description: 执行保持行为不变的安全重构，例如重命名 symbol、提取函数、移动模块、简化结构或删除已确认的死代码。需要改善代码组织且不打算改变外部可观察行为时使用。
 ---
 
-# Refactor
+# 重构
 
-Make structural changes in small, verifiable steps while preserving behavior and public contracts.
+在保持行为和公开 contract 的前提下，用小步且可验证的方式进行结构变更。
 
-## Workflow
+## 工作流
 
-1. Define the intended structural improvement and the behavior that must not change. Run the relevant baseline tests before editing when practical.
-2. Use `change-impact-analysis` for public functions, interfaces, modules, messages, shared state, or lifecycle code. Search all references, including tests, configuration, scripts, generated code, and documentation.
-3. Make one coherent mechanical change at a time: rename, extract, move, or simplify. Keep unrelated cleanup out of the diff.
-4. Update imports, registrations, build files, configuration, tests, docs, and generated artifacts as required. Check dynamic lookup, plugin loading, reflection, and string-based references before removing code.
-5. Run formatting, lint, type checks, focused tests, and then the broader project test command. Use `git diff --check` and inspect the complete diff.
-6. Compare behavior at boundaries: public API, serialized data, logs/metrics, error handling, resource lifetime, concurrency, and performance-sensitive paths.
+1. 定义目标结构改进和必须保持不变的行为。条件允许时，编辑前先运行相关 baseline tests。
+2. 对公开函数、接口、模块、消息、共享状态或生命周期代码使用 change-impact-analysis。搜索所有引用，包括测试、配置、脚本、生成代码和文档。
+3. 每次只进行一种连贯的机械变更：重命名、提取、移动或简化。不要把无关清理混入 diff。
+4. 按需更新 imports、registrations、构建文件、配置、测试、文档和生成产物。删除代码前检查动态查找、plugin loading、reflection 和字符串引用。
+5. 运行格式化、lint、类型检查、聚焦测试，再运行项目更广泛的测试命令。使用 git diff --check 并检查完整 diff。
+6. 比较边界行为：公开 API、序列化数据、日志/metrics、错误处理、资源生命周期、并发和性能敏感路径。
 
-## Guardrails
+## 防护规则
 
-- Preserve compatibility unless a breaking change is explicitly requested.
-- Do not remove code merely because `rg` finds no direct references; verify dynamic and configuration paths.
-- Do not combine a refactor with a feature change or speculative bug fix.
-- Stop and report if tests, generated files, or external consumers make the intended refactor unsafe.
+- 除非明确要求 breaking change，否则保持兼容性。
+- 不要仅因为 rg 找不到直接引用就删除代码；验证动态路径和配置路径。
+- 不要把重构与功能变更或猜测性 Bug 修复混在一起。
+- 如果测试、生成文件或外部消费者使重构不安全，停止并报告。
 
-Report the files changed, behavior-preservation evidence, tests run, and any remaining uncertainty.
+报告修改的文件、保持行为的证据、运行的测试以及剩余不确定性。

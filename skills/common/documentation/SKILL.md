@@ -1,20 +1,20 @@
 ---
 name: documentation
-description: Starter cross-project skill for Documentation. Use when Codex needs the workflows, conventions, or references maintained for documentation.
+description: 跨项目文档工作的起始 Skill。需要维护文档相关工作流、约定或参考资料时使用。
 ---
 
-# Documentation
+# 文档维护
 
-Replace this starter content with the reusable instructions for the `documentation` skill.
+将此模板替换为 documentation Skill 的可复用说明。
 
-## Scope
+## 范围
 
-- Category: `common`
-- Purpose: Describe what this skill knows or automates.
-- Triggers: List the user requests that should activate this skill.
+- 分类：common
+- 用途：说明此 Skill 掌握或自动化的内容。
+- 触发条件：列出应激活此 Skill 的用户请求。
 
-## Workflow
+## 工作流
 
-1. Add the normal workflow for this skill.
-2. Add validation or safety checks.
-3. Link directly to any files in `references/`, `scripts/`, or `assets/` when they are needed.
+1. 补充此 Skill 的标准工作流。
+2. 添加验证或安全检查。
+3. 需要使用 references、scripts 或 assets 中的文件时，直接建立链接。

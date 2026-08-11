@@ -29,3 +29,6 @@
 - Challenge: 让 `--shared` 生成的 Skill 树也位于当前项目目录内。
 - Changes: `create-skill-tree --shared` 默认改为当前项目的 `.agents/skills/`；需要更新机器级全局库时可显式传入 `~/.agents/skills`。
 - Validation: 当前项目路径、显式全局路径、项目 Skill 发现路径、两套生成脚本语法、23 个 Skill 元数据校验和 `git diff --check` 均通过。
+- Challenge: 让 Skill 说明更符合中文使用习惯。
+- Changes: 将仓库内 Skill 的 description、正文、模板、CHANGELOG 参考格式和界面提示统一改为中文优先；保留命令、代码标识、协议名和必要技术术语为英文。
+- Validation: 23 个仓库 Skill、Observationguilite 项目 Skill 和 skill-tree-scaffold Skill 均通过 quick_validate；openai.yaml YAML 解析通过；残留英文模板扫描和 git diff --check 通过。

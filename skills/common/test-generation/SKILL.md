@@ -1,26 +1,26 @@
 ---
 name: test-generation
-description: Add focused tests for changed behavior, bug regressions, edge cases, and interface contracts using the repository's existing test conventions. Use after an implementation change, bug fix, refactor, or when targeted coverage is missing.
+description: 遵循仓库现有测试约定，为变更行为、Bug 回归、边界条件和接口 contract 增加聚焦测试。实现变更、Bug 修复、重构后，或缺少针对性覆盖时使用。
 ---
 
-# Test Generation
+# 测试生成
 
-Turn the changed behavior and its failure modes into the smallest useful regression coverage.
+将变更行为及其失败模式转化为最小且有用的回归覆盖。
 
-## Workflow
+## 工作流
 
-1. Read the change, diagnosis, and existing nearby tests. Identify the contract, inputs, outputs, side effects, error behavior, and concurrency or timing assumptions.
-2. Detect the project test framework, fixture style, naming convention, setup/teardown, mocks, factories, and standard test commands. Follow existing patterns.
-3. Choose the narrowest useful layer: unit test for local logic, integration test for boundaries, or end-to-end test only when lower layers cannot prove the behavior.
-4. Add a focused happy-path test, the relevant boundary or negative case, and a regression case for the reported failure when applicable. Avoid duplicating broad coverage.
-5. Prefer real small values and stable fakes over excessive mocking. Assert observable behavior and important side effects, not private implementation details.
-6. Run the new test first, then the relevant suite and project-standard checks. If feasible, verify that the regression test would fail without the fix or explain why that check is impractical.
+1. 阅读变更、诊断结论和附近已有测试。识别 contract、输入、输出、副作用、错误行为以及并发或时序假设。
+2. 识别项目测试框架、fixture 风格、命名约定、setup/teardown、mocks、factories 和标准测试命令。遵循现有模式。
+3. 选择最窄且有用的层级：局部逻辑使用 unit test，边界使用 integration test，只有低层无法证明行为时才使用 end-to-end test。
+4. 添加聚焦的 happy path 测试、相关边界或负例，以及适用时针对报告失败的回归用例。避免重复宽泛覆盖。
+5. 优先使用真实的小数据和稳定 fake，避免过度 mocking。断言可观察行为和重要副作用，不要断言私有实现细节。
+6. 先运行新增测试，再运行相关 suite 和项目标准检查。可行时验证没有修复时回归测试会失败，否则解释为什么无法验证。
 
-## Quality Checks
+## 质量检查
 
-- Keep tests deterministic, isolated, readable, and fast.
-- Avoid weakening assertions merely to make a test pass.
-- Do not alter production behavior just to accommodate a test.
-- Include cleanup and resource handling for files, processes, network clients, ROS nodes, or hardware fakes.
+- 保持测试确定、隔离、可读且快速。
+- 不要仅为让测试通过而削弱断言。
+- 不要为了适应测试而改变生产行为。
+- 为文件、进程、network client、ROS node 或硬件 fake 加入清理和资源处理。
 
-Report the scenarios covered, commands run, and any remaining untested risk.
+报告覆盖的场景、运行的命令和仍未测试的风险。

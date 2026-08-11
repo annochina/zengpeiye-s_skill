@@ -1,20 +1,20 @@
 ---
 name: lerobot-policy
-description: Starter technical-domain skill for Lerobot Policy. Use when Codex needs the workflows, conventions, or references maintained for lerobot-policy.
+description: LeRobot 策略领域的起始 Skill。需要处理 policy 定义、推理行为、动作输出或策略评估时使用。
 ---
 
-# Lerobot Policy
+# LeRobot 策略
 
-Replace this starter content with the reusable instructions for the `lerobot-policy` skill.
+将此模板替换为 lerobot-policy Skill 的项目或团队专属说明。
 
-## Scope
+## 范围
 
-- Category: `domain`
-- Purpose: Describe what this skill knows or automates.
-- Triggers: List the user requests that should activate this skill.
+- 分类：domain
+- 用途：描述 policy 接口、输入输出、动作空间和评估方法。
+- 触发条件：列出应激活此 Skill 的用户请求。
 
-## Workflow
+## 工作流
 
-1. Add the normal workflow for this skill.
-2. Add validation or safety checks.
-3. Link directly to any files in `references/`, `scripts/`, or `assets/` when they are needed.
+1. 补充策略配置、推理和评估流程。
+2. 添加输入输出 contract、动作边界和安全检查。
+3. 需要时链接 references、scripts 或 assets 中的资源。

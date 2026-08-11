@@ -1,20 +1,20 @@
 ---
 name: lerobot-training
-description: Starter technical-domain skill for Lerobot Training. Use when Codex needs the workflows, conventions, or references maintained for lerobot-training.
+description: LeRobot 训练领域的起始 Skill。需要处理训练配置、实验流程、checkpoint、指标或训练结果复现时使用。
 ---
 
-# Lerobot Training
+# LeRobot 训练
 
-Replace this starter content with the reusable instructions for the `lerobot-training` skill.
+将此模板替换为 lerobot-training Skill 的项目或团队专属说明。
 
-## Scope
+## 范围
 
-- Category: `domain`
-- Purpose: Describe what this skill knows or automates.
-- Triggers: List the user requests that should activate this skill.
+- 分类：domain
+- 用途：描述训练参数、数据准备、实验记录、checkpoint 和评估。
+- 触发条件：列出应激活此 Skill 的用户请求。
 
-## Workflow
+## 工作流
 
-1. Add the normal workflow for this skill.
-2. Add validation or safety checks.
-3. Link directly to any files in `references/`, `scripts/`, or `assets/` when they are needed.
+1. 补充训练前检查、训练执行和结果分析流程。
+2. 添加数据、资源、指标和可复现性验证。
+3. 需要时链接 references、scripts 或 assets 中的资源。

@@ -1,4 +1,4 @@
 interface:
-  display_name: "Code Review"
-  short_description: "Review code changes for defects and risk"
-  default_prompt: "Use $code-review to review this diff for correctness, risk, and test coverage."
+  display_name: "代码审查"
+  short_description: "检查代码变更的缺陷和风险"
+  default_prompt: "使用 $code-review 审查这个 diff 的正确性、风险和测试覆盖率。"

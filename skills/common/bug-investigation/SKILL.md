@@ -1,29 +1,29 @@
 ---
 name: bug-investigation
-description: Investigate a bug from symptoms to a reproducible, evidence-backed root cause without making speculative code changes. Use when behavior is wrong, a test or service fails, logs show an unexpected state, or the user asks to locate a bug before fixing it.
+description: 从现象定位到可复现且有证据支持的根因，不进行猜测性代码修改。行为异常、测试或 service 失败、日志出现意外状态，或用户要求先定位 Bug 再修复时使用。
 ---
 
-# Bug Investigation
+# Bug 定位
 
-Separate diagnosis from repair. Establish what is happening, prove why it happens, and only implement a fix when the user asks for one.
+将诊断与修复分开。先确认发生了什么并证明原因；只有用户要求时才实现修复。
 
-## Workflow
+## 工作流
 
-1. Capture the symptom precisely: expected behavior, actual behavior, trigger, frequency, environment, recent changes, and exact error or log text.
-2. Reproduce with the smallest safe command or test. Record the command, inputs, observed output, and whether the reproduction is deterministic.
-3. Trace the failing path from the entry point through callers, state transitions, I/O, protocol boundaries, and error handling. Use `rg` for definitions and references.
-4. Form a small set of falsifiable hypotheses. Rank them by evidence, then test one hypothesis at a time with read-only inspection, focused tests, logs, or temporary instrumentation.
-5. Compare expected and actual values at the earliest point where they diverge. Distinguish the root cause from downstream symptoms and unrelated warnings.
-6. Check whether the issue is caused by configuration, environment, timing, concurrency, stale artifacts, an API contract, or data assumptions before blaming a single line of code.
+1. 精确记录现象：预期行为、实际行为、触发方式、频率、环境、近期修改，以及完整的错误或日志文本。
+2. 使用最小且安全的命令或测试复现。记录命令、输入、观察到的输出，以及复现是否稳定。
+3. 从入口经过 callers、状态转换、I/O、协议边界和错误处理追踪失败路径。使用 rg 查找定义和引用。
+4. 提出少量可证伪的假设。按证据排序，然后通过只读检查、聚焦测试、日志或临时 instrumentation 一次验证一个假设。
+5. 在预期值和实际值第一次分叉的位置进行比较。区分根因、下游症状和无关警告。
+6. 在归因于某一行代码前，检查配置、环境、时序、并发、过期产物、API contract 或数据假设是否导致问题。
 
-## Report
+## 输出
 
-Report:
+报告包含：
 
-- minimal reproduction and environment;
-- evidence and the first divergence point;
-- confirmed or most likely root cause with confidence;
-- affected scope and why nearby hypotheses were rejected;
-- recommended fix boundary and regression test.
+- 最小复现步骤和环境；
+- 证据以及第一次分叉点；
+- 已确认或最可能的根因及置信度；
+- 影响范围，以及排除相邻假设的原因；
+- 建议的修复边界和回归测试。
 
-Do not patch around the symptom, rewrite unrelated code, or claim a root cause without evidence. If a fix is requested, preserve the diagnosis and use `test-generation` for a focused regression test.
+不要围绕症状打补丁、重写无关代码，或在没有证据时声称已经找到根因。如果用户要求修复，保留诊断结论，并使用 test-generation 增加针对性的回归测试。

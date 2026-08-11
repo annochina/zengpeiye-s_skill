@@ -1,20 +1,20 @@
 ---
 name: ros-navigation
-description: Starter technical-domain skill for Ros Navigation. Use when Codex needs the workflows, conventions, or references maintained for ros-navigation.
+description: ROS 导航领域的起始 Skill。需要处理定位、路径规划、导航栈、地图或导航行为调试时使用。
 ---
 
-# Ros Navigation
+# ROS 导航
 
-Replace this starter content with the reusable instructions for the `ros-navigation` skill.
+将此模板替换为 ros-navigation Skill 的项目或团队专属说明。
 
-## Scope
+## 范围
 
-- Category: `domain`
-- Purpose: Describe what this skill knows or automates.
-- Triggers: List the user requests that should activate this skill.
+- 分类：domain
+- 用途：描述地图、定位、规划、控制和导航节点之间的关系。
+- 触发条件：列出应激活此 Skill 的用户请求。
 
-## Workflow
+## 工作流
 
-1. Add the normal workflow for this skill.
-2. Add validation or safety checks.
-3. Link directly to any files in `references/`, `scripts/`, or `assets/` when they are needed.
+1. 补充导航系统的启动、调试和验证流程。
+2. 添加 topic、service、frame、参数和安全边界检查。
+3. 需要时链接 references、scripts 或 assets 中的资源。

@@ -1,25 +1,25 @@
 ---
 name: code-review
-description: Review a diff for correctness, regressions, edge cases, compatibility, security, performance, maintainability, and test coverage. Use when reviewing a patch, pull request, staged changes, or a requested code review; do not modify the code unless explicitly asked.
+description: 审查 diff 的正确性、回归、边界条件、兼容性、安全性、性能、可维护性和测试覆盖率。审查 patch、pull request、staged changes 或用户要求进行 code review 时使用；除非明确要求，不修改代码。
 ---
 
-# Code Review
+# 代码审查
 
-Review the proposed change, not the codebase in the abstract. Findings must be evidence-based and actionable.
+审查拟议变更本身，不要泛泛审查整个代码库。所有发现都必须有证据且可执行。
 
-## Workflow
+## 工作流
 
-1. Inspect `git status`, the diff, the base commit, and `git diff --check`. Confirm the intended scope and preserve unrelated user changes.
-2. Read each changed file in context, including callers, contracts, neighboring error handling, configuration, and relevant tests. Use `change-impact-analysis` when the diff changes an interface or shared behavior.
-3. Check, in order: correctness and control flow; state, concurrency, resource lifetime, and error paths; boundary and malformed inputs; compatibility and protocol/schema behavior; security and sensitive data; performance; maintainability; and test adequacy.
-4. Run focused checks or tests when they are safe and available. Do not hide failures or infer passing behavior from a test that was not run.
-5. Report findings first, ordered by severity: blocker, high, medium, low. Include file and line references, the failure mechanism, impact, and a concrete fix direction. Separate findings from questions and praise.
+1. 检查 git status、diff、base commit 和 git diff --check。确认目标范围，保留无关的用户修改。
+2. 在上下文中阅读每个修改文件，包括 callers、contracts、相邻错误处理、配置和相关测试。diff 修改接口或共享行为时使用 change-impact-analysis。
+3. 按顺序检查：正确性和控制流；状态、并发、资源生命周期和错误路径；边界及畸形输入；兼容性和协议/schema 行为；安全性和敏感数据；性能；可维护性；测试是否充分。
+4. 在安全且可用时运行聚焦检查或测试。不要隐藏失败，也不要根据未运行的测试推断通过。
+5. 先报告 findings，并按严重程度排序：blocker、high、medium、low。包含文件和行号、失败机制、影响以及具体修复方向。将 findings、问题和正向反馈分开。
 
-## Review Rules
+## 审查规则
 
-- Do not report style preferences as defects unless they violate a project rule or create a real risk.
-- Do not speculate about unreachable paths without showing how the path is reached.
-- Check tests for false positives, missing assertions, and untested failure modes.
-- If no actionable findings exist, say so and list residual test or environment risks.
+- 除非违反项目规则或造成真实风险，不要把风格偏好报告为缺陷。
+- 不要在没有展示路径如何到达的情况下，猜测不可达路径的问题。
+- 检查测试是否存在 false positive、缺少断言或未覆盖失败模式。
+- 如果没有可执行的 findings，要明确说明，并列出剩余测试或环境风险。
 
-Do not edit, stage, commit, push, or open a PR during review unless the user explicitly requests that follow-up action.
+审查期间不要编辑、stage、commit、push 或创建 PR，除非用户明确要求后续执行这些操作。

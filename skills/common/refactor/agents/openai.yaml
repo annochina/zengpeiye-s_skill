@@ -1,4 +1,4 @@
 interface:
-  display_name: "Refactor"
-  short_description: "Perform safe structured refactors"
-  default_prompt: "Use $refactor to plan and verify this rename, extraction, move, or dead-code cleanup."
+  display_name: "重构"
+  short_description: "执行安全的结构化重构"
+  default_prompt: "使用 $refactor 规划并验证这次重命名、提取、移动或死代码清理。"

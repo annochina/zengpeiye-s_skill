@@ -1,4 +1,4 @@
 interface:
-  display_name: "Architecture Exploration"
-  short_description: "Explore an unfamiliar project architecture"
-  default_prompt: "Use $architecture-exploration to map this unfamiliar project before changing code."
+  display_name: "架构探索"
+  short_description: "梳理陌生项目的架构"
+  default_prompt: "使用 $architecture-exploration 在修改代码前梳理这个陌生项目。"

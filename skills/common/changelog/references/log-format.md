@@ -1,54 +1,44 @@
-# CHANGELOG Entry Format
+# CHANGELOG 记录格式
 
-Use the project's existing Markdown style. The following format works with common Keep a Changelog layouts.
+使用项目已有的 Markdown 风格。以下格式适合常见的 Keep a Changelog 布局。
 
-## Date Heading
+## 日期标题
 
-Keep one date heading per local calendar date. Match the repository's existing style, for example:
+每个本地日历日期只保留一个标题，并匹配仓库现有风格。
 
-```markdown
-## - 2026-08-11
-```
+## Bug / Fixed 记录
 
-## Bug / Fixed Entry
-
-```markdown
 ### Fixed
 
-- **BUG-001: Short title** — one-line symptom and outcome.
-  - Root cause: explain the first divergence and mechanism.
-  - Attempted: record rejected or insufficient approaches.
-  - Final solution: describe the selected fix and compatibility impact.
-  - Modified files: `path/to/file.py:Symbol`.
-  - Verification: tests, commands, logs, or observed behavior.
-  - Early detection: the signal that should identify this issue quickly next time.
-```
+- BUG-001：简短标题——用一句话描述症状和结果。
+  - 根因：解释第一次分叉以及发生机制。
+  - 尝试过：记录被否决或不足的方案。
+  - 最终方案：描述选定修复及兼容性影响。
+  - 修改文件：path/to/file.py:Symbol。
+  - 验证：测试、命令、日志或观察结果。
+  - 快速识别：下次应尽早捕获此问题的信号。
 
-## Architecture Entry
+## 架构记录
 
-```markdown
 ### Architecture
 
-- **ARCH-001: Short title** — durable fact about modules, entry points, data flow, lifecycle, protocol, or build constraints.
-  - Evidence: files, symbols, tests, or configuration that establish the fact.
-  - Impact: what future changes must preserve.
-```
+- ARCH-001：简短标题——记录模块、入口、数据流、生命周期、协议或构建约束等长期事实。
+  - 证据：能够证明该事实的文件、symbol、测试或配置。
+  - 影响：后续修改必须保持的内容。
 
-## Decision Entry
+## 决策记录
 
-```markdown
 ### Decisions
 
-- **DEC-001: Short title** — selected decision.
-  - Context: why a decision was needed.
-  - Options: alternatives considered.
-  - Tradeoffs: cost, compatibility, performance, or maintenance impact.
-  - Revisit when: conditions that would justify changing it.
-```
+- DEC-001：简短标题——记录最终决策。
+  - 背景：为什么需要做决策。
+  - 选项：考虑过的替代方案。
+  - 权衡：成本、兼容性、性能或维护影响。
+  - 重新评估条件：什么情况下需要重新考虑。
 
-## Rules
+## 规则
 
-- Preserve historical entries; mark old attempts as rejected instead of deleting them.
-- Use stable IDs only when they help cross-reference a meaningful entry.
-- Use repository-relative paths and exact commands.
-- Never store credentials, tokens, or private customer data.
+- 保留历史记录；旧方案标记为否决，不要删除。
+- 只有有助于交叉引用时才使用稳定 ID。
+- 使用仓库相对路径和准确命令。
+- 绝不记录 credential、token 或私密客户数据。

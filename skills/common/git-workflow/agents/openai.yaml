@@ -1,4 +1,4 @@
 interface:
-  display_name: "Git Workflow"
-  short_description: "Move changes safely from diff to PR"
-  default_prompt: "Use $git-workflow to prepare this change for checks, commit, and review."
+  display_name: "Git 工作流"
+  short_description: "安全地从 diff 推进到 PR"
+  default_prompt: "使用 $git-workflow 为这个变更准备检查、commit 和评审。"

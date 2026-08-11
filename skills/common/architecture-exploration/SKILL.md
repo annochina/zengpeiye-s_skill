@@ -1,30 +1,30 @@
 ---
 name: architecture-exploration
-description: Explore an unfamiliar repository before making changes by mapping its entry points, modules, runtime flow, dependencies, configuration, tests, and project conventions. Use when first entering a codebase, taking over an unfamiliar service or firmware project, or needing a reliable architecture overview.
+description: 在修改前探索陌生仓库，梳理入口、模块、运行流程、依赖、配置、测试和项目约定。首次进入代码库、接手陌生服务或固件项目，或需要可靠架构概览时使用。
 ---
 
-# Architecture Exploration
+# 架构探索
 
-Build a concise, evidence-based map of an unfamiliar project before editing it.
+在编辑陌生项目之前，建立一份简洁、基于证据的项目地图。
 
-## Workflow
+## 工作流
 
-1. Identify the repository root, active branch, dirty worktree, and likely generated or vendor directories. Preserve all existing user changes.
-2. Read the top-level README, contribution notes, build manifests, dependency manifests, container files, launch files, and CI configuration.
-3. Inventory the source tree with `rg --files`. Locate executable entry points, service nodes, CLI commands, `main` functions, application bootstrap code, and hardware-facing boundaries.
-4. Trace the normal runtime or data flow from entry point through major modules. Read the caller and callee around important boundaries instead of reading every file.
-5. Locate configuration, environment variables, message or API definitions, persistence, external services, generated code, and test fixtures.
-6. Find the project-standard commands for build, lint, test, packaging, deployment, and local execution. Prefer documented commands over guesses.
+1. 确认仓库根目录、当前分支、工作区是否有未提交修改，以及可能的生成目录或 vendor 目录。保留用户已有的全部修改。
+2. 阅读顶层 README、贡献说明、构建清单、依赖清单、容器文件、launch 文件和 CI 配置。
+3. 使用 rg --files 盘点源码树。定位可执行入口、service node、CLI 命令、main 函数、应用启动代码和面向硬件的边界。
+4. 从入口经过主要模块追踪正常运行或数据流。围绕重要边界阅读 caller 和 callee，不要无目的地读完所有文件。
+5. 定位配置、环境变量、消息或 API 定义、持久化、外部服务、生成代码和测试 fixture。
+6. 找到项目约定的构建、lint、测试、打包、部署和本地运行命令。优先使用文档中的命令，不要凭猜测执行。
 
-## Report
+## 输出
 
-Return a compact map containing:
+返回一份精简地图，包含：
 
-- repository root and build/runtime entry points;
-- module or package responsibilities;
-- control flow and important data or message paths;
-- external dependencies, protocols, configuration, and generated artifacts;
-- test locations and verified commands;
-- uncertain areas, risks, and the next files worth reading.
+- 仓库根目录以及构建/运行入口；
+- 模块或 package 的职责；
+- 控制流以及重要的数据或消息路径；
+- 外部依赖、协议、配置和生成产物；
+- 测试位置和已经验证的命令；
+- 不确定区域、风险以及下一步值得阅读的文件。
 
-Do not modify production code during exploration. If a follow-up change is requested, use the map to select the smallest relevant scope and run `change-impact-analysis` before editing an interface.
+探索期间不要修改生产代码。如果后续要求修改，使用这份地图选择最小相关范围；编辑接口前先运行 change-impact-analysis。

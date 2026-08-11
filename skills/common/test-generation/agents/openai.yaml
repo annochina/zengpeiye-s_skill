@@ -1,4 +1,4 @@
 interface:
-  display_name: "Test Generation"
-  short_description: "Generate focused regression tests"
-  default_prompt: "Use $test-generation to add targeted tests for this completed change."
+  display_name: "测试生成"
+  short_description: "生成聚焦的回归测试"
+  default_prompt: "使用 $test-generation 为已完成的变更增加针对性测试。"

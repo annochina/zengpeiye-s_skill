@@ -1,27 +1,23 @@
 ---
 name: changelog
-description: Maintain a project's root CHANGELOG.md as durable engineering memory for meaningful bugs, architecture discoveries, and design decisions. Record symptoms, root cause, failed attempts, final solution, modified files, verification, and early detection clues. Use when a problem is solved, a non-obvious project fact is learned, or a decision should remain available to future Codex sessions.
+description: 维护项目根目录 CHANGELOG.md，将重要 Bug、架构发现和设计决策沉淀为长期工程记忆。问题解决、发现非显而易见的项目事实或需要记录决策时使用。
 ---
 
-# CHANGELOG
+# CHANGELOG 维护
 
-Use the consuming project's root `CHANGELOG.md` as the single record for both release history and durable development knowledge. Do not create separate side logs for the same project.
+将使用方项目根目录的 CHANGELOG.md 作为发布历史和开发经验的唯一记录。不要为同一个项目创建额外日志。
 
-## Workflow
+## 工作流
 
-1. Read the project's existing `CHANGELOG.md` before adding an entry. Preserve its date and category conventions.
-2. Record only durable knowledge: non-obvious bugs, root-cause investigations, architecture facts, protocol or lifecycle constraints, and design decisions. Do not record routine edits or raw logs.
-3. Classify the entry under the existing date heading using `Fixed`, `Changed`, `Added`, `Architecture`, or `Decisions`. Create the current local date heading only when needed.
-4. For a bug, capture the symptom, reproduction, root cause, failed attempts, final solution, modified files, verification, and early detection clue.
-5. For architecture, capture entry points, module responsibilities, data flow, boundaries, constraints, and evidence.
-6. For a decision, capture context, options, selected choice, tradeoffs, compatibility impact, rejected alternatives, and revisit conditions.
-7. Link to repository-relative files and symbols. Remove secrets, tokens, personal data, and unstable machine-specific paths.
-8. Keep one durable entry per problem, fact, or decision. Extend an existing entry when new evidence belongs to the same issue instead of creating duplicates.
+1. 添加记录前先阅读项目现有的 CHANGELOG.md，保留其日期和分类约定。
+2. 只记录长期有价值的内容：非显而易见的 Bug、根因分析、架构事实、协议或生命周期约束，以及设计决策。不要记录普通编辑或原始日志。
+3. 使用现有日期标题下的 Fixed、Changed、Added、Architecture 或 Decisions 分类。只有确实需要时才创建当前日期标题。
+4. 对 Bug 记录症状、复现方式、根因、失败尝试、最终方案、修改文件、验证方式和下次的快速识别线索。
+5. 对架构记录入口、模块职责、数据流、边界、约束和证据。
+6. 对决策记录背景、备选方案、最终选择、权衡、兼容性影响、否决的替代方案和重新评估条件。
+7. 使用仓库相对路径和 symbol 链接。删除 secret、token、个人数据和不稳定的机器路径。
+8. 每个问题、事实或决策只保留一条长期记录。新证据属于同一问题时扩展已有记录，不要重复创建。
 
-## Entry Pattern
+## 与 Streak 的关系
 
-Use [references/log-format.md](references/log-format.md) for the detailed format. Keep entries concise enough to scan and specific enough to prevent the same investigation from being repeated.
-
-## Relationship to Streak
-
-The global `streak` Skill tracks the daily challenge and repository modification cadence. This Skill records the engineering knowledge learned during that work. Both write to `CHANGELOG.md`, using the existing date heading and separate category bullets where appropriate.
+全局 streak Skill 记录每日 challenge 和仓库修改节奏。本 Skill 记录这次工作中积累的工程知识。两者都写入 CHANGELOG.md，并沿用现有日期标题下的不同分类。

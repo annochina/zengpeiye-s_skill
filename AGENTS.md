@@ -19,6 +19,8 @@
 
 ## Change workflow
 
+Skill 的 description、正文和界面提示优先使用中文；命令、代码标识、协议名、API 名称和必要技术术语保留英文。
+
 1. Read the target Skill and inspect its existing metadata before editing.
 2. Keep unrelated Skills and project files out of the change.
 3. Validate every changed Skill with `quick_validate.py`.
