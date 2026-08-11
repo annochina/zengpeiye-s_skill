@@ -14,6 +14,7 @@ SHARED_SKILL_TREE = {
         "architecture-exploration",
         "bug-investigation",
         "change-impact-analysis",
+        "changelog",
         "code-review",
         "documentation",
         "embedded-debug",

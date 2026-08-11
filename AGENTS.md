@@ -7,6 +7,7 @@
 - Edit the repository files, not the installed global link directly.
 - Keep project-only knowledge in the consuming project's `.agents/skills/` directory.
 - Every repository modification must add or update the matching local-date entry in `CHANGELOG.md` in the same commit.
+- Record durable project debugging, architecture, and decision knowledge in the consuming project's root `CHANGELOG.md` through the global `changelog` Skill.
 
 ## Skill layout
 

@@ -31,6 +31,7 @@ ln -sfn /path/to/my-codex-skills/skills /home/$USER/.agents/skills
 
 - `common/`：架构探索、Bug 定位、影响分析、代码审查、重构、测试生成、Git 工作流等。
 - `common/streak/`：维护按本地日期记录的每日 challenge 和连续 streak。
+- `common/changelog/`：将项目 Bug、架构事实和设计决策沉淀到项目根目录 `CHANGELOG.md`。
 - `domain/`：ROS1、ROS2、导航、录制、LeRobot 数据集、训练、策略和部署。
 - `project/`：机器人车、BLDC 控制器、Tracker 等项目类模板。
 
@@ -49,3 +50,11 @@ find skills -type f -name SKILL.md -exec dirname {} \; \
 ## Daily Challenge Log
 
 每次修改仓库内容都必须同步更新根目录的 [`CHANGELOG.md`](CHANGELOG.md)。同一天使用同一个日期标题追加记录，不要创建重复日期标题。
+
+项目开发经验统一写入项目根目录的 `CHANGELOG.md`：
+
+```bash
+python scripts/init_changelog.py --project /path/to/project
+```
+
+如果项目没有 `CHANGELOG.md`，该命令会创建一个安全的初始模板；已有日志默认保留不覆盖。`CHANGELOG.md` 同时记录仓库修改和可复用的开发经验。
