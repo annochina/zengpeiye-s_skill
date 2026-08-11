@@ -32,3 +32,6 @@
 - Challenge: 让 Skill 说明更符合中文使用习惯。
 - Changes: 将仓库内 Skill 的 description、正文、模板、CHANGELOG 参考格式和界面提示统一改为中文优先；保留命令、代码标识、协议名和必要技术术语为英文。
 - Validation: 23 个仓库 Skill、Observationguilite 项目 Skill 和 skill-tree-scaffold Skill 均通过 quick_validate；openai.yaml YAML 解析通过；残留英文模板扫描和 git diff --check 通过。
+- Challenge: 修复项目本地旧版 streak Skill 仍显示英文的问题。
+- Changes: 将生成器 starter 模板改为中文，并在 Observationguilite 项目中重新生成 .agents/skills 下的共享 Skill 副本。
+- Validation: 当前项目共享 Skill 重新生成成功；streak 内容和全部项目副本的英文 starter 残留扫描通过。

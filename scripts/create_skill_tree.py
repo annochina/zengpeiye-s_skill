@@ -41,38 +41,63 @@ PROJECT_RELEASE_SUFFIX_PATTERN = re.compile(
     r"[-_]master[-_]delivery$", re.IGNORECASE
 )
 
+SKILL_TITLES = {
+    "architecture-exploration": "架构探索",
+    "bug-investigation": "Bug 定位",
+    "change-impact-analysis": "变更影响分析",
+    "changelog": "CHANGELOG 维护",
+    "code-review": "代码审查",
+    "documentation": "文档维护",
+    "embedded-debug": "嵌入式调试",
+    "git-workflow": "Git 工作流",
+    "refactor": "重构",
+    "streak": "Streak",
+    "test-generation": "测试生成",
+    "ros1": "ROS1",
+    "ros2": "ROS2",
+    "ros-navigation": "ROS 导航",
+    "ros-recording": "ROS 录制",
+    "lerobot-dataset": "LeRobot 数据集",
+    "lerobot-training": "LeRobot 训练",
+    "lerobot-policy": "LeRobot 策略",
+    "lerobot-deployment": "LeRobot 部署",
+}
+
 
 def skill_title(skill_name: str) -> str:
-    return " ".join(part.capitalize() for part in skill_name.split("-"))
+    return SKILL_TITLES.get(
+        skill_name,
+        " ".join(part.capitalize() for part in skill_name.split("-")),
+    )
 
 
 def starter_skill_md(category: str, skill_name: str) -> str:
     title = skill_title(skill_name)
     category_label = {
-        "common": "cross-project",
-        "domain": "technical-domain",
-        "project": "project-specific",
+        "common": "跨项目",
+        "domain": "技术领域",
+        "project": "项目专属",
     }[category]
     return f"""---
 name: {skill_name}
-description: Starter {category_label} skill for {title}. Use when Codex needs the workflows, conventions, or references maintained for {skill_name}.
+description: {category_label} Skill：{title}。需要维护 {skill_name} 相关工作流、约定或参考资料时使用。
 ---
 
 # {title}
 
-Replace this starter content with the reusable instructions for the `{skill_name}` skill.
+将此模板替换为 {skill_name} Skill 的项目或团队专属说明。
 
-## Scope
+## 范围
 
-- Category: `{category}`
-- Purpose: Describe what this skill knows or automates.
-- Triggers: List the user requests that should activate this skill.
+- 分类：{category}
+- 用途：描述此 Skill 掌握或自动化的内容。
+- 触发条件：列出应激活此 Skill 的用户请求。
 
-## Workflow
+## 工作流
 
-1. Add the normal workflow for this skill.
-2. Add validation or safety checks.
-3. Link directly to any files in `references/`, `scripts/`, or `assets/` when they are needed.
+1. 补充此 Skill 的标准工作流。
+2. 添加验证或安全检查。
+3. 需要时链接 references、scripts 或 assets 中的资源。
 """
 
 
