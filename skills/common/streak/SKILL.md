@@ -50,7 +50,7 @@ When handing off work, report the date entry and the current streak only when it
 When creating a project-specific Skill, run the generator from the project root:
 
 ```bash
-create-skill-tree --project-skill
+create-skill-tree
 ```
 
-The command uses the current project directory name as the Skill name and creates it one level below the project at `./.agents/skills/<project-directory-name>/`. Pass a name after `--project-skill` to override it, or use `--project /path/to/project` for a different project.
+The command uses the current project directory name as the Skill name and creates it one level below the project at `./.agents/skills/<project-directory-name>/`. Release suffixes such as `-master_delivery` are removed and the result is normalized to a valid lowercase hyphenated name. Pass a name after `--project-skill` to override it, or use `--project /path/to/project` for a different project. Use `--shared` when updating the global shared library.

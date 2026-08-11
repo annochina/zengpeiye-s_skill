@@ -23,3 +23,6 @@
 - Challenge: 让项目 Skill 名称直接复用项目文件夹名称。
 - Changes: `--project-skill` 现在允许省略名称，自动使用当前项目目录名；显式名称和 `--project` 仍然兼容。
 - Validation: 省略名称自动命名、显式名称、指定项目目录、命令帮助、23 个 Skill 元数据校验和 `git diff --check` 均通过。
+- Challenge: 让项目根目录直接执行 `create-skill-tree` 就能创建项目 Skill。
+- Changes: 默认模式改为使用当前目录创建项目 Skill；新增 `--shared` 用于创建或更新全局共享 Skill 库；自动去除 `-master_delivery` 等发布后缀并规范化名称。
+- Validation: 默认项目模式、`--shared` 模式、`observationguilite-master_delivery` 后缀清理、23 个 Skill 元数据校验和 `git diff --check` 均通过。

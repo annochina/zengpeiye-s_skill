@@ -30,6 +30,12 @@
 
 Keep repository-specific Codex configuration in `.codex/config.toml`. Do not add MCP servers, hooks, credentials, or destructive automation without an explicit requirement.
 
+## Skill generator defaults
+
+- Run `create-skill-tree` from a project root to create `./.agents/skills/<normalized-project-name>/SKILL.md`.
+- The generator removes release suffixes such as `-master_delivery` from the project directory name.
+- Use `create-skill-tree --shared` to create or update the global shared Skill library.
+
 ## Fresh-machine bootstrap
 
 - Run `./scripts/bootstrap.sh` after cloning this repository.

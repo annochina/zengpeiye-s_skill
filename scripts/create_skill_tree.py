@@ -37,6 +37,9 @@ SHARED_SKILL_TREE = {
 
 DEFAULT_TARGET = Path.home() / ".agents" / "skills"
 SKILL_NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+PROJECT_RELEASE_SUFFIX_PATTERN = re.compile(
+    r"[-_]master[-_]delivery$", re.IGNORECASE
+)
 
 
 def skill_title(skill_name: str) -> str:
@@ -75,14 +78,19 @@ Replace this starter content with the reusable instructions for the `{skill_name
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Create shared and project-local agent skills."
+        description="Create a project-local Skill in the current directory."
     )
     parser.add_argument(
         "target",
         nargs="?",
         type=Path,
         default=None,
-        help=f"shared skill destination (default: {DEFAULT_TARGET})",
+        help=f"shared skill destination when --shared is used (default: {DEFAULT_TARGET})",
+    )
+    parser.add_argument(
+        "--shared",
+        action="store_true",
+        help="create or update the shared Skill library instead of a project Skill",
     )
     parser.add_argument(
         "--project",
@@ -126,6 +134,18 @@ def validate_skill_name(skill_name: str) -> None:
         raise ValueError(
             f"invalid skill name {skill_name!r}; use lowercase letters, digits, and hyphens"
         )
+
+
+def project_skill_name(project: Path) -> str:
+    """Derive a valid Skill name from a project directory name."""
+    name = PROJECT_RELEASE_SUFFIX_PATTERN.sub("", project.name)
+    name = re.sub(r"[^a-zA-Z0-9]+", "-", name).strip("-").lower()
+    if not name:
+        raise ValueError(
+            f"cannot derive a skill name from project directory: {project}"
+        )
+    validate_skill_name(name)
+    return name
 
 
 def create_shared_tree(
@@ -217,24 +237,32 @@ def create_project_skills(
 def main() -> int:
     args = parse_args()
     try:
-        if args.project is not None or args.project_skill:
-            if args.target is not None:
-                raise ValueError("do not combine a shared target with project skill creation")
-            project = (args.project or Path.cwd()).expanduser().resolve()
-            project_skill_names = [
-                skill_name or project.name for skill_name in args.project_skill
-            ]
-            return create_project_skills(
-                project,
-                project_skill_names,
+        if args.shared:
+            if args.project is not None or args.project_skill:
+                raise ValueError("do not combine --shared with project Skill options")
+            target = (args.target or DEFAULT_TARGET).expanduser().resolve()
+            return create_shared_tree(
+                target,
                 args.force,
                 args.directories_only,
                 args.dry_run,
             )
 
-        target = (args.target or DEFAULT_TARGET).expanduser().resolve()
-        return create_shared_tree(
-            target,
+        if args.target is not None:
+            raise ValueError("a shared target requires --shared")
+
+        project = (args.project or Path.cwd()).expanduser().resolve()
+        if args.project_skill:
+            skill_names = [
+                skill_name or project_skill_name(project)
+                for skill_name in args.project_skill
+            ]
+        else:
+            skill_names = [project_skill_name(project)]
+
+        return create_project_skills(
+            project,
+            skill_names,
             args.force,
             args.directories_only,
             args.dry_run,
