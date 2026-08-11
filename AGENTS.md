@@ -29,3 +29,10 @@
 ## Runtime configuration
 
 Keep repository-specific Codex configuration in `.codex/config.toml`. Do not add MCP servers, hooks, credentials, or destructive automation without an explicit requirement.
+
+## Fresh-machine bootstrap
+
+- Run `./scripts/bootstrap.sh` after cloning this repository.
+- The script links `~/.agents/skills` to this repository's `skills/`, installs the maintenance commands, and adds `~/.local/bin` to shell startup files.
+- Use `--no-shell-config` when shell startup files must remain untouched.
+- The script is idempotent and preserves conflicting existing paths as numbered backups.

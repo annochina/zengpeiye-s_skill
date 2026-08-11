@@ -15,6 +15,17 @@ my-codex-skills/
 └── .codex/config.toml
 ```
 
+## 新机器一键部署
+
+```bash
+git clone https://github.com/annochina/zengpeiye-s_skill.git my-codex-skills
+cd my-codex-skills
+./scripts/bootstrap.sh
+source ~/.bashrc
+```
+
+`bootstrap.sh` 会把仓库的 `skills/` 链接到 `~/.agents/skills`，创建 `~/.codex/skills/skill-library` 兼容链接，并安装 `create-skill-tree` 与 `init-changelog` 命令。脚本可以重复执行；已有冲突路径会先保留为备份。
+
 全局发现路径应指向仓库中的 `skills/`：
 
 ```bash

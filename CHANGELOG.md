@@ -13,4 +13,7 @@
 - Changes: 新增全局 `changelog` Skill、`references/log-format.md` 和 `init_changelog.py`，统一使用项目根目录 `CHANGELOG.md` 记录开发经验。
 - Follow-up: 根据用户要求移除临时侧目录方案，所有项目经验统一写入根目录 `CHANGELOG.md`。
 - Validation: 22 个 Skill 目录通过 `quick_validate.py`；`git diff --check` 通过；`init_changelog.py --dry-run` 保留已有项目 `CHANGELOG.md`；`create-skill-tree --dry-run` 包含 `changelog` 和 `streak`。
+- Challenge: 让全新机器从 Git 拉取后可以一键恢复全局 Skill 环境。
+- Changes: 新增 `scripts/bootstrap.sh`，负责全局软链接、Codex 兼容路径、维护命令和 shell PATH 初始化。
+- Validation: `bash -n scripts/bootstrap.sh` 通过；临时 home 首次/重复部署通过；当前机器 `--no-shell-config` 部署通过；23 个 Skill 目录和 `git diff --check` 通过。
 - Next: 每次后续 Skill、配置或脚本修改都在当天条目下追加挑战结果。
