@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Generation"
+  short_description: "Generate focused regression tests"
+  default_prompt: "Use $test-generation to add targeted tests for this completed change."

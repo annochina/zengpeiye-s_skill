@@ -1,0 +1,3 @@
+# Repository-local Codex configuration placeholder.
+# Keep MCP, hook, and other Codex settings here when this repository needs them.
+# Do not store credentials or machine-specific secrets in this file.

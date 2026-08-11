@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Exploration"
+  short_description: "Explore an unfamiliar project architecture"
+  default_prompt: "Use $architecture-exploration to map this unfamiliar project before changing code."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Change Impact Analysis"
+  short_description: "Analyze change impact before editing"
+  default_prompt: "Use $change-impact-analysis to analyze callers, dependents, and protocol impact before changing this interface."

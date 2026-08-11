@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Workflow"
+  short_description: "Move changes safely from diff to PR"
+  default_prompt: "Use $git-workflow to prepare this change for checks, commit, and review."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bug Investigation"
+  short_description: "Investigate bugs from symptoms to cause"
+  default_prompt: "Use $bug-investigation to investigate this symptom without making premature code changes."

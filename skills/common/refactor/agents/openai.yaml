@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refactor"
+  short_description: "Perform safe structured refactors"
+  default_prompt: "Use $refactor to plan and verify this rename, extraction, move, or dead-code cleanup."
