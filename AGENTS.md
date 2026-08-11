@@ -12,6 +12,7 @@
 ## Skill layout
 
 - `skills/common/`: workflows that apply across projects.
+- `skills/common/` also includes the imported production engineering workflows from `addyosmani/agent-skills`; preserve their internal `skills/references/` links when updating them.
 - `skills/domain/`: reusable technical-domain knowledge such as ROS and LeRobot.
 - `skills/project/`: reusable project-category templates.
 - Every Skill directory must contain a valid `SKILL.md` with lowercase hyphenated `name` and a specific trigger-oriented `description`.
@@ -36,7 +37,7 @@ Keep repository-specific Codex configuration in `.codex/config.toml`. Do not add
 
 - Run `create-skill-tree` from a project root to create `./.agents/skills/<normalized-project-name>/SKILL.md`.
 - The generator removes release suffixes such as `-master_delivery` from the project directory name.
-- Run `create-skill-tree --shared` to create the shared Skill tree under the current project's `.agents/skills/`.
+- Run `create-skill-tree --shared` from a project root to link `.agents/skills/common/` and `.agents/skills/domain/` to `~/.agents/skills/`; existing ordinary directories are backed up under `.agents/skills.backup/`.
 - Pass `~/.agents/skills` explicitly when the machine-level global library must be updated.
 
 ## Fresh-machine bootstrap

@@ -45,4 +45,4 @@ description: 通过在 CHANGELOG.md 中记录仓库每次修改，维护 Skill �
 
 在项目根目录运行 create-skill-tree。命令使用当前项目目录名创建项目 Skill，位置为当前项目的 .agents/skills/<项目名>/。会去掉 -master_delivery 等发布后缀，并将名称规范化为小写连字符格式。
 
-需要显式名称时可以使用 create-skill-tree --project-skill NAME。需要在当前项目创建共享树时使用 create-skill-tree --shared；需要更新机器级全局库时显式传入 ~/.agents/skills。
+需要显式名称时可以使用 create-skill-tree --project-skill NAME。需要让当前项目使用统一的共享 Skill 时运行 create-skill-tree --shared；它会将 .agents/skills/common/ 和 .agents/skills/domain/ 链接到 ~/.agents/skills/，旧的普通目录会备份到 .agents/skills.backup/。需要更新机器级全局库时显式传入 ~/.agents/skills。

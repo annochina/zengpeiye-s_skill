@@ -35,3 +35,10 @@
 - Challenge: 修复项目本地旧版 streak Skill 仍显示英文的问题。
 - Changes: 将生成器 starter 模板改为中文，并在 Observationguilite 项目中重新生成 .agents/skills 下的共享 Skill 副本。
 - Validation: 当前项目共享 Skill 重新生成成功；streak 内容和全部项目副本的英文 starter 残留扫描通过。
+- Challenge: 让所有项目的共享 Skill 与全局源码保持同一份内容。
+- Changes: 将 `create-skill-tree` 的项目 `common/` 和 `domain/` 改为指向 `~/.agents/skills/` 的软链接；已有普通目录会备份到 `.agents/skills.backup/`，项目专属 Skill 继续保留为普通目录。
+- Validation: Observationguilite 项目软链接转换、重复执行保持链接、生成器语法、Skill 元数据校验和 `git diff --check` 通过。
+- Challenge: 扩充全局 common Skill，加入成熟的生产级工程工作流。
+- Changes: 引入 `addyosmani/agent-skills` 的 24 个 Skill 到 `skills/common/`，同步其 7 个共享检查表到 `skills/references/`，补充 MIT 许可声明，并将 Skill 入口说明翻译为中文。生成器现在识别这些 Skill；`--force` 只覆盖本生成器产生的 starter 文件，不覆盖已引入的自定义内容。
+- Validation: 24 个上游 Skill 文件、7 个共享参考文件和 MIT 声明已落盘；路径引用已适配当前目录结构；全部 Skill 通过 `quick_validate.py`，生成器语法、项目发现、`--force --dry-run` 保护和 `git diff --check` 均通过。
+- Next: 后续上游工作流更新时，先审查差异，再同步到 `skills/common/` 并重新运行完整校验。

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import shutil
 import sys
 from pathlib import Path
 
@@ -22,6 +23,30 @@ SHARED_SKILL_TREE = {
         "refactor",
         "streak",
         "test-generation",
+        "api-and-interface-design",
+        "browser-testing-with-devtools",
+        "ci-cd-and-automation",
+        "code-review-and-quality",
+        "code-simplification",
+        "context-engineering",
+        "debugging-and-error-recovery",
+        "deprecation-and-migration",
+        "documentation-and-adrs",
+        "doubt-driven-development",
+        "frontend-ui-engineering",
+        "git-workflow-and-versioning",
+        "idea-refine",
+        "incremental-implementation",
+        "interview-me",
+        "observability-and-instrumentation",
+        "performance-optimization",
+        "planning-and-task-breakdown",
+        "security-and-hardening",
+        "shipping-and-launch",
+        "source-driven-development",
+        "spec-driven-development",
+        "test-driven-development",
+        "using-agent-skills",
     ),
     "domain": (
         "ros1",
@@ -35,7 +60,7 @@ SHARED_SKILL_TREE = {
     ),
 }
 
-DEFAULT_SHARED_TARGET = Path(".agents") / "skills"
+GLOBAL_SHARED_ROOT = Path.home() / ".agents" / "skills"
 SKILL_NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 PROJECT_RELEASE_SUFFIX_PATTERN = re.compile(
     r"[-_]master[-_]delivery$", re.IGNORECASE
@@ -61,6 +86,30 @@ SKILL_TITLES = {
     "lerobot-training": "LeRobot 训练",
     "lerobot-policy": "LeRobot 策略",
     "lerobot-deployment": "LeRobot 部署",
+    "api-and-interface-design": "API 与接口设计",
+    "browser-testing-with-devtools": "浏览器 DevTools 测试",
+    "ci-cd-and-automation": "CI/CD 与自动化",
+    "code-review-and-quality": "代码审查与质量",
+    "code-simplification": "代码简化",
+    "context-engineering": "上下文工程",
+    "debugging-and-error-recovery": "调试与错误恢复",
+    "deprecation-and-migration": "弃用与迁移",
+    "documentation-and-adrs": "文档与 ADR",
+    "doubt-driven-development": "质疑驱动开发",
+    "frontend-ui-engineering": "前端 UI 工程",
+    "git-workflow-and-versioning": "Git 工作流与版本管理",
+    "idea-refine": "想法提炼",
+    "incremental-implementation": "增量实现",
+    "interview-me": "需求访谈",
+    "observability-and-instrumentation": "可观测性与埋点",
+    "performance-optimization": "性能优化",
+    "planning-and-task-breakdown": "规划与任务拆解",
+    "security-and-hardening": "安全与加固",
+    "shipping-and-launch": "发布与上线",
+    "source-driven-development": "来源驱动开发",
+    "spec-driven-development": "规格驱动开发",
+    "test-driven-development": "测试驱动开发",
+    "using-agent-skills": "Agent Skill 使用指南",
 }
 
 
@@ -99,6 +148,18 @@ description: {category_label} Skill：{title}。需要维护 {skill_name} 相关
 2. 添加验证或安全检查。
 3. 需要时链接 references、scripts 或 assets 中的资源。
 """
+
+
+def generated_skill_action(
+    skill_file: Path, category: str, skill_name: str, force: bool
+) -> str:
+    if not skill_file.exists():
+        return "create"
+    if not force:
+        return "keep"
+    if skill_file.read_text(encoding="utf-8") == starter_skill_md(category, skill_name):
+        return "overwrite"
+    return "keep-custom"
 
 
 def parse_args() -> argparse.Namespace:
@@ -173,6 +234,62 @@ def project_skill_name(project: Path) -> str:
     return name
 
 
+def next_backup_path(path: Path) -> Path:
+    candidate = path
+    suffix = 0
+    while candidate.exists() or candidate.is_symlink():
+        suffix += 1
+        suffix_text = "" if suffix == 1 else f".{suffix - 1}"
+        candidate = Path(f"{path}.backup{suffix_text}")
+    return candidate
+
+
+def ensure_symlink(link_path: Path, target: Path, dry_run: bool) -> None:
+    if not target.is_dir():
+        raise ValueError(
+            f"global shared Skill category does not exist: {target}; "
+            "run bootstrap first or specify an explicit shared target"
+        )
+
+    expected = target.resolve()
+    if link_path.is_symlink() and link_path.resolve() == expected:
+        print(f"keep      link      {link_path} -> {target}")
+        return
+
+    if dry_run:
+        action = "backup+link" if link_path.exists() or link_path.is_symlink() else "link"
+        print(f"{action:9} link      {link_path} -> {target}")
+        return
+
+    if link_path.exists() or link_path.is_symlink():
+        backup_root = link_path.parent.with_name(f"{link_path.parent.name}.backup")
+        backup_path = next_backup_path(backup_root / link_path.name)
+        backup_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(link_path), str(backup_path))
+        print(f"backup    path      {link_path} -> {backup_path}")
+
+    link_path.parent.mkdir(parents=True, exist_ok=True)
+    link_path.symlink_to(target, target_is_directory=True)
+    print(f"link      directory {link_path} -> {target}")
+
+
+def ensure_project_shared_links(project: Path, dry_run: bool) -> int:
+    target = project / ".agents" / "skills"
+    validate_directory(target)
+    if not dry_run:
+        target.mkdir(parents=True, exist_ok=True)
+
+    for category in SHARED_SKILL_TREE:
+        ensure_symlink(
+            target / category,
+            GLOBAL_SHARED_ROOT / category,
+            dry_run,
+        )
+
+    print(f"Project shared Skill links ready: {target}")
+    return 0
+
+
 def create_shared_tree(
     target: Path, force: bool, directories_only: bool, dry_run: bool
 ) -> int:
@@ -187,8 +304,8 @@ def create_shared_tree(
                 print(f"{'keep' if skill_path.exists() else 'create':9} directory {skill_path}")
                 if not directories_only:
                     skill_file = skill_path / "SKILL.md"
-                    action = "overwrite" if skill_file.exists() and force else (
-                        "keep" if skill_file.exists() else "create"
+                    action = generated_skill_action(
+                        skill_file, category, skill_name, force
                     )
                     print(f"{action:9} file      {skill_file}")
         return 0
@@ -203,7 +320,7 @@ def create_shared_tree(
             if directories_only:
                 continue
             skill_file = skill_path / "SKILL.md"
-            if skill_file.exists() and not force:
+            if generated_skill_action(skill_file, category, skill_name, force) != "overwrite" and skill_file.exists():
                 continue
             skill_file.write_text(
                 starter_skill_md(category, skill_name), encoding="utf-8"
@@ -226,9 +343,14 @@ def create_project_skills(
         raise ValueError(f"project path is not a directory: {project}")
     for skill_name in skill_names:
         validate_skill_name(skill_name)
+        if skill_name in SHARED_SKILL_TREE:
+            raise ValueError(
+                f"project skill name {skill_name!r} is reserved for shared Skill categories"
+            )
 
     target = project / ".agents" / "skills"
     validate_directory(target)
+    ensure_project_shared_links(project, dry_run)
     if dry_run:
         print(f"{'keep' if target.exists() else 'create':9} directory {target}")
         for skill_name in skill_names:
@@ -265,9 +387,9 @@ def main() -> int:
         if args.shared:
             if args.project is not None or args.project_skill:
                 raise ValueError("do not combine --shared with project Skill options")
-            target = (
-                args.target or Path.cwd() / DEFAULT_SHARED_TARGET
-            ).expanduser().resolve()
+            if args.target is None:
+                return ensure_project_shared_links(Path.cwd().resolve(), args.dry_run)
+            target = args.target.expanduser().resolve()
             return create_shared_tree(
                 target,
                 args.force,

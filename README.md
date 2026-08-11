@@ -9,6 +9,7 @@ my-codex-skills/
 ├── skills/
 │   ├── common/       # 跨项目通用 Skill
 │   ├── domain/       # ROS、LeRobot 等技术领域 Skill
+│   ├── references/    # 共享 Skill 检查表
 │   └── project/      # 可复用的项目类 Skill 模板
 ├── scripts/          # Skill 库维护脚本
 ├── AGENTS.md         # 本仓库协作规则
@@ -43,6 +44,8 @@ ln -sfn /path/to/my-codex-skills/skills /home/$USER/.agents/skills
 - `common/`：架构探索、Bug 定位、影响分析、代码审查、重构、测试生成、Git 工作流等。
 - `common/streak/`：维护按本地日期记录的每日 challenge 和连续 streak。
 - `common/changelog/`：将项目 Bug、架构事实和设计决策沉淀到项目根目录 `CHANGELOG.md`。
+- `common/` 还包含来自 [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) 的生产级工程流程 Skill，例如规格、规划、增量实现、测试、审查、安全、性能和发布。
+- 上游 Skill 的共享检查表位于 `skills/references/`；其 MIT 许可副本位于 `third_party/addyosmani-agent-skills/LICENSE`。
 - `domain/`：ROS1、ROS2、导航、录制、LeRobot 数据集、训练、策略和部署。
 - `project/`：机器人车、BLDC 控制器、Tracker 等项目类模板。
 
@@ -70,7 +73,14 @@ create-skill-tree --project /path/to/project
 create-skill-tree --shared
 ```
 
-默认会在当前项目下创建 `.agents/skills/common/` 和 `.agents/skills/domain/`。如果确实要写入机器级全局库，请显式指定全局路径：
+默认会在当前项目下维护两个软链接：
+
+```text
+.agents/skills/common -> ~/.agents/skills/common
+.agents/skills/domain -> ~/.agents/skills/domain
+```
+
+这样所有项目读取同一份共享 Skill 源码；项目专属 Skill 仍然以普通目录放在 `.agents/skills/` 下。已有的普通 `common/` 或 `domain/` 目录会先备份到 `.agents/skills.backup/`。如果确实要写入机器级全局库，请显式指定全局路径：
 
 ```bash
 create-skill-tree --shared ~/.agents/skills
