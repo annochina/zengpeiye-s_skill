@@ -44,5 +44,6 @@ Keep repository-specific Codex configuration in `.codex/config.toml`. Do not add
 
 - Run `./scripts/bootstrap.sh` after cloning this repository.
 - The script links `~/.agents/skills` to this repository's `skills/`, installs the maintenance commands, and adds `~/.local/bin` to shell startup files.
+- The installed `git_push.sh` uses the current repository's configured remote and branch; it never falls back to an implicit force push.
 - Use `--no-shell-config` when shell startup files must remain untouched.
 - The script is idempotent and preserves conflicting existing paths as numbered backups.

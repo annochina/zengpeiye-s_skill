@@ -25,7 +25,7 @@ cd my-codex-skills
 source ~/.bashrc
 ```
 
-`bootstrap.sh` 会把仓库的 `skills/` 链接到 `~/.agents/skills`，创建 `~/.codex/skills/skill-library` 兼容链接，并安装 `create-skill-tree` 与 `init-changelog` 命令。脚本可以重复执行；已有冲突路径会先保留为备份。
+`bootstrap.sh` 会把仓库的 `skills/` 链接到 `~/.agents/skills`，创建 `~/.codex/skills/skill-library` 兼容链接，并安装 `create-skill-tree`、`init-changelog` 与 `git_push.sh` 命令。脚本可以重复执行；已有冲突路径会先保留为备份。
 
 全局发现路径应指向仓库中的 `skills/`：
 
@@ -107,3 +107,17 @@ python scripts/init_changelog.py --project /path/to/project
 ```
 
 如果项目没有 `CHANGELOG.md`，该命令会创建一个安全的初始模板；已有日志默认保留不覆盖。`CHANGELOG.md` 同时记录仓库修改和可复用的开发经验。
+
+## 通用 Git 推送
+
+`git_push.sh` 复用原有的提交、tag、分支查看和远程分支删除流程，但默认读取当前仓库的 `origin` 和当前分支，不写死远程地址，也不会自动 force push：
+
+```bash
+git_push.sh push "提交消息"
+git_push.sh push "发布版本" --tag
+git_push.sh major "大版本更新"
+git_push.sh branches
+git_push.sh delete old-branch
+```
+
+默认会执行 `git add -A`；只提交已暂存文件时使用 `--staged-only`。确需改写远程历史时，显式使用 `--force-with-lease`。

@@ -116,6 +116,7 @@ ensure_link "$agents_skills" "$shared_source"
 ensure_link "$codex_library" "$agents_skills"
 ensure_link "$bin_dir/create-skill-tree" "$repo_root/scripts/create_skill_tree.py"
 ensure_link "$bin_dir/init-changelog" "$repo_root/scripts/init_changelog.py"
+ensure_link "$bin_dir/git_push.sh" "$repo_root/scripts/git_push.sh"
 
 add_path_to_file() {
     local shell_file="$1"
@@ -155,5 +156,5 @@ fi
 echo "Bootstrap complete"
 echo "Repository: $repo_root"
 echo "Shared skills: $agents_skills"
-echo "Commands: $bin_dir/create-skill-tree, $bin_dir/init-changelog"
+echo "Commands: $bin_dir/create-skill-tree, $bin_dir/init-changelog, $bin_dir/git_push.sh"
 echo "Restart the shell or export PATH=\"$bin_dir:\$PATH\" to use the commands now."

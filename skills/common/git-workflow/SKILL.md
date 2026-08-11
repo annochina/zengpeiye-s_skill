@@ -24,3 +24,12 @@ description: 应用从 diff 检查、验证到有意提交、push 和 pull reque
 - 让 commit 和 PR 范围与用户请求保持一致。
 
 结束时报告分支、commit、检查结果和发布状态。如果用户没有要求 commit 或 push，在报告已验证的 diff 后停止。
+
+## 通用推送脚本
+
+仓库部署后可以使用 `git_push.sh` 复用提交、tag 和推送流程：
+
+- 默认读取当前仓库的 `origin` 和当前分支，不写死远程地址。
+- 默认会执行 `git add -A`；只提交已暂存文件时使用 `git_push.sh push "消息" --staged-only`。
+- 不会自动 force push；确需改写远程历史时显式使用 `--force-with-lease`。
+- 使用自动 tag 或 major 发布前，先更新根目录 `CHANGELOG.md`，再运行脚本。

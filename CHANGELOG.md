@@ -42,3 +42,7 @@
 - Changes: 引入 `addyosmani/agent-skills` 的 24 个 Skill 到 `skills/common/`，同步其 7 个共享检查表到 `skills/references/`，补充 MIT 许可声明，并将 Skill 入口说明翻译为中文。生成器现在识别这些 Skill；`--force` 只覆盖本生成器产生的 starter 文件，不覆盖已引入的自定义内容。
 - Validation: 24 个上游 Skill 文件、7 个共享参考文件和 MIT 声明已落盘；路径引用已适配当前目录结构；全部 Skill 通过 `quick_validate.py`，生成器语法、项目发现、`--force --dry-run` 保护和 `git diff --check` 均通过。
 - Next: 后续上游工作流更新时，先审查差异，再同步到 `skills/common/` 并重新运行完整校验。
+- Challenge: 将常用的 Git 推送脚本改造成可跨项目复用的安全工具。
+- Changes: 新增 `scripts/git_push.sh`，保留提交、tag、分支查看和远程分支删除功能；改为使用当前仓库的 remote/branch，加入 `--staged-only`、`--force-with-lease` 和删除确认，并由 bootstrap 安装到 `~/.local/bin/`；同步在 `git-workflow` Skill 中记录使用约定。
+- Validation: `bash -n scripts/git_push.sh`、帮助信息、临时 Git 仓库的安全失败路径和 `git diff --check` 通过。
+- Next: 在实际项目中先使用 `--staged-only` 验证提交流程，再按需使用自动 tag。
