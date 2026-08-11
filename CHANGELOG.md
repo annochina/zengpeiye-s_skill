@@ -20,3 +20,6 @@
 - Challenge: 让项目创建 Skill 时不必重复输入项目路径。
 - Changes: `create-skill-tree --project-skill NAME` 现在默认使用当前目录，并在当前目录下自动创建 `.agents/skills/NAME/`；保留 `--project` 作为指定其他项目的选项。
 - Validation: 当前目录创建、指定 `--project` 创建、命令帮助、23 个 Skill 元数据校验和 `git diff --check` 均通过。
+- Challenge: 让项目 Skill 名称直接复用项目文件夹名称。
+- Changes: `--project-skill` 现在允许省略名称，自动使用当前项目目录名；显式名称和 `--project` 仍然兼容。
+- Validation: 省略名称自动命名、显式名称、指定项目目录、命令帮助、23 个 Skill 元数据校验和 `git diff --check` 均通过。

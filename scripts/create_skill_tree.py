@@ -93,8 +93,10 @@ def parse_args() -> argparse.Namespace:
         "--project-skill",
         action="append",
         default=[],
+        nargs="?",
+        const="",
         metavar="NAME",
-        help="project skill name; repeat this option for multiple skills",
+        help="project skill name; omit NAME to use the project directory name",
     )
     parser.add_argument(
         "--force",
@@ -219,9 +221,12 @@ def main() -> int:
             if args.target is not None:
                 raise ValueError("do not combine a shared target with project skill creation")
             project = (args.project or Path.cwd()).expanduser().resolve()
+            project_skill_names = [
+                skill_name or project.name for skill_name in args.project_skill
+            ]
             return create_project_skills(
                 project,
-                args.project_skill,
+                project_skill_names,
                 args.force,
                 args.directories_only,
                 args.dry_run,

@@ -52,10 +52,15 @@ ln -sfn /path/to/my-codex-skills/skills /home/$USER/.agents/skills
 
 ```bash
 cd /path/to/project
-create-skill-tree --project-skill my-project-skill
+create-skill-tree --project-skill
 ```
 
-命令会自动在当前目录的下一级创建 `.agents/skills/my-project-skill/`。也可以用 `--project /path/to/project` 为指定项目创建 Skill。
+命令会使用当前项目文件夹名称作为 Skill 名称，并自动在当前目录的下一级创建 `.agents/skills/<项目文件夹名>/`。也可以继续显式指定名称，或用 `--project /path/to/project` 为指定项目创建 Skill：
+
+```bash
+create-skill-tree --project-skill custom-name
+create-skill-tree --project /path/to/project --project-skill
+```
 
 ## 校验
 
