@@ -46,3 +46,9 @@
 - Changes: 新增 `scripts/git_push.sh`，保留提交、tag、分支查看和远程分支删除功能；改为使用当前仓库的 remote/branch，加入 `--staged-only`、`--force-with-lease` 和删除确认，并由 bootstrap 安装到 `~/.local/bin/`；同步在 `git-workflow` Skill 中记录使用约定。
 - Validation: `bash -n scripts/git_push.sh`、帮助信息、临时 Git 仓库的安全失败路径和 `git diff --check` 通过。
 - Next: 在实际项目中先使用 `--staged-only` 验证提交流程，再按需使用自动 tag。
+
+## 2026-08-19
+
+- Challenge: 让项目 Skill 的改动按独立变更立即交付，避免未上传改动累积。
+- Changes: 在 `naviai-manip-lerobot-cleaner-convert-gui` 项目 Skill 中加入每个独立逻辑改动都要先写 `CHANGELOG.md`、单独 commit 并立即 push 的约定；明确隔离已有脏改动，push 失败时停止继续修改。
+- Validation: `skill-creator` 的 `quick_validate.py` 通过；Skill 内容检查通过。
