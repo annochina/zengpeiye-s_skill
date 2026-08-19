@@ -52,3 +52,7 @@
 - Challenge: 让项目 Skill 的改动按独立变更立即交付，避免未上传改动累积。
 - Changes: 在 `naviai-manip-lerobot-cleaner-convert-gui` 项目 Skill 中加入每个独立逻辑改动都要先写 `CHANGELOG.md`、单独 commit 并立即 push 的约定；明确隔离已有脏改动，push 失败时停止继续修改。
 - Validation: `skill-creator` 的 `quick_validate.py` 通过；Skill 内容检查通过。
+
+- Challenge: 让 `create-skill-tree` 初始化项目时自动建立 Skill 检查入口。
+- Changes: 项目模式现在会在项目根目录幂等创建或更新带标记的 `AGENTS.md` Skill-discovery 提示；保留已有项目规则，拒绝修改软链接指向的共享 `AGENTS.md`；显式更新全局 Skill 库时不触碰项目指令文件。
+- Validation: Python 编译、帮助命令、`git diff --check` 和临时项目首次创建/已有文件保护/重复执行/`--directories-only`/全局 `--shared` 隔离测试通过。

@@ -37,7 +37,9 @@ Keep repository-specific Codex configuration in `.codex/config.toml`. Do not add
 
 - Run `create-skill-tree` from a project root to create `./.agents/skills/<normalized-project-name>/SKILL.md`.
 - The generator removes release suffixes such as `-master_delivery` from the project directory name.
+- Project-mode runs also create or update a managed Skill-discovery prompt in the project root `AGENTS.md`; existing instructions are preserved and repeated runs are idempotent.
 - Run `create-skill-tree --shared` from a project root to link `.agents/skills/common/` and `.agents/skills/domain/` to `~/.agents/skills/`; existing ordinary directories are backed up under `.agents/skills.backup/`.
+- `create-skill-tree --shared <global-target>` updates only the global Skill library and does not modify a project `AGENTS.md`.
 - Pass `~/.agents/skills` explicitly when the machine-level global library must be updated.
 
 ## Fresh-machine bootstrap

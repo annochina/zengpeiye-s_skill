@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create shared skills and project-local agent skills."""
+"""Create shared skills, project-local agent skills, and project instructions."""
 
 from __future__ import annotations
 
@@ -61,6 +61,26 @@ SHARED_SKILL_TREE = {
 }
 
 GLOBAL_SHARED_ROOT = Path.home() / ".agents" / "skills"
+AGENTS_FILE_NAME = "AGENTS.md"
+AGENTS_SKILL_DISCOVERY_BEGIN = "<!-- BEGIN CODEX SKILL DISCOVERY -->"
+AGENTS_SKILL_DISCOVERY_END = "<!-- END CODEX SKILL DISCOVERY -->"
+AGENTS_SKILL_DISCOVERY_BLOCK = "\n".join(
+    (
+        AGENTS_SKILL_DISCOVERY_BEGIN,
+        "## Skill 检查",
+        "",
+        "每次开始分析、规划、执行命令或修改文件前，必须先检查当前项目 `.agents/skills/` 是否存在适用 Skill：",
+        "",
+        "1. 检查可用 Skill 及其软链接目标。",
+        "2. 根据任务选择最小的适用 Skill；用户明确指定的 Skill 必须使用。",
+        "3. 执行实质操作前，完整读取对应的 `SKILL.md`。",
+        "4. 没有匹配 Skill 或链接失效时，说明原因后再继续。",
+        "5. 不需要读取全部 Skill，只读取候选 Skill。",
+        "",
+        "用户当前要求和项目 `AGENTS.md` 规则优先于 Skill 中的普通建议。",
+        AGENTS_SKILL_DISCOVERY_END,
+    )
+)
 SKILL_NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 PROJECT_RELEASE_SUFFIX_PATTERN = re.compile(
     r"[-_]master[-_]delivery$", re.IGNORECASE
@@ -164,7 +184,10 @@ def generated_skill_action(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Create a project-local Skill in the current directory."
+        description=(
+            "Create project-local Skills and maintain the project AGENTS.md "
+            "Skill-discovery prompt."
+        )
     )
     parser.add_argument(
         "target",
@@ -213,6 +236,45 @@ def parse_args() -> argparse.Namespace:
 def validate_directory(target: Path) -> None:
     if target.exists() and not target.is_dir():
         raise ValueError(f"target exists and is not a directory: {target}")
+
+
+def ensure_agents_skill_prompt(project: Path, dry_run: bool) -> None:
+    """Add or update the managed Skill-discovery block in project AGENTS.md."""
+    agents_file = project / AGENTS_FILE_NAME
+    if agents_file.is_symlink():
+        raise ValueError(
+            f"refusing to modify symlinked project instructions: {agents_file}"
+        )
+    if agents_file.exists() and not agents_file.is_file():
+        raise ValueError(f"project instructions path is not a file: {agents_file}")
+
+    content = agents_file.read_text(encoding="utf-8") if agents_file.exists() else ""
+    has_begin = AGENTS_SKILL_DISCOVERY_BEGIN in content
+    has_end = AGENTS_SKILL_DISCOVERY_END in content
+    if has_begin != has_end:
+        raise ValueError(
+            f"incomplete Skill-discovery markers in project instructions: {agents_file}"
+        )
+
+    if has_begin:
+        start = content.index(AGENTS_SKILL_DISCOVERY_BEGIN)
+        end = content.index(AGENTS_SKILL_DISCOVERY_END) + len(
+            AGENTS_SKILL_DISCOVERY_END
+        )
+        updated = content[:start] + AGENTS_SKILL_DISCOVERY_BLOCK + content[end:]
+        action = "keep" if updated == content else "update"
+    else:
+        separator = ""
+        if content:
+            separator = "" if content.endswith("\n\n") else "\n"
+            if not content.endswith("\n"):
+                separator = "\n\n"
+        updated = content + separator + AGENTS_SKILL_DISCOVERY_BLOCK + "\n"
+        action = "create" if not agents_file.exists() else "append"
+
+    print(f"{action:9} file      {agents_file}")
+    if not dry_run and action != "keep":
+        agents_file.write_text(updated, encoding="utf-8")
 
 
 def validate_skill_name(skill_name: str) -> None:
@@ -286,6 +348,7 @@ def ensure_project_shared_links(project: Path, dry_run: bool) -> int:
             dry_run,
         )
 
+    ensure_agents_skill_prompt(project, dry_run)
     print(f"Project shared Skill links ready: {target}")
     return 0
 
