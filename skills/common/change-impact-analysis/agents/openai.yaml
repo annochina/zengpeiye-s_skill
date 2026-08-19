@@ -1,0 +1,4 @@
+interface:
+  display_name: "变更影响分析"
+  short_description: "编辑前分析变更影响"
+  default_prompt: "使用 $change-impact-analysis 在修改这个接口前分析 callers、依赖方和协议影响。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bug 定位"
+  short_description: "从现象定位 Bug 根因"
+  default_prompt: "使用 $bug-investigation 定位这个现象，在证据充分前不要提前修改代码。"
