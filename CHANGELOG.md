@@ -56,3 +56,10 @@
 - Challenge: 让 `create-skill-tree` 初始化项目时自动建立 Skill 检查入口。
 - Changes: 项目模式现在会在项目根目录幂等创建或更新带标记的 `AGENTS.md` Skill-discovery 提示；保留已有项目规则，拒绝修改软链接指向的共享 `AGENTS.md`；显式更新全局 Skill 库时不触碰项目指令文件。
 - Validation: Python 编译、帮助命令、`git diff --check` 和临时项目首次创建/已有文件保护/重复执行/`--directories-only`/全局 `--shared` 隔离测试通过。
+
+## 2026-08-25
+
+- Challenge: 将程序说明整理需求沉淀为专门的飞书文档输出 Skill，避免与通用 Markdown 排版或代码分析混用。
+- Changes: 新增 `skills/common/feishu-software-docs/`，支持程序使用文档、功能表、模块说明、ROS/CLI 接口与部署说明；约束事实保真、命令和代码原样、未知状态标记为“待确认”、按内容选择章节并输出标准飞书友好 Markdown；新增 `agents/openai.yaml` 界面元数据。
+- Validation: `quick_validate.py` 通过；当前项目 `.agents/skills/common` 发现路径可见；Skill 252 行，未包含 TODO 占位；13 项触发、边界和七类输入场景标记覆盖检查通过；`openai.yaml` 元数据检查和目标文件 `git diff --check` 通过。
+- Next: 使用真实 README、ROS、CLI、信息不完整和已有 Markdown 样本进行一次端到端人工复核，再按反馈收敛触发边界。

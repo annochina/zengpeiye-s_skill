@@ -1,0 +1,4 @@
+interface:
+  display_name: "飞书软件文档"
+  short_description: "整理程序说明、功能与接口并输出飞书友好 Markdown"
+  default_prompt: "使用 $feishu-software-docs 将这个程序整理成可复制到飞书的使用文档。"
