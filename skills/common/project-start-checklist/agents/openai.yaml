@@ -1,0 +1,4 @@
+interface:
+  display_name: "项目开始清单"
+  short_description: "在项目开工前系统确认需求、接口、风险与验收标准，减少返工"
+  default_prompt: "使用 $project-start-checklist 在开始这个项目任务前检查需求、接口、风险和验收标准。"

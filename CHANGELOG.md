@@ -70,3 +70,8 @@
 - Changes: 更新主项目 Skill：`_delivery` 目录默认推送到 `naviai_delivery_push`，无 `_delivery` 后缀的目录默认推送到 `naviai_data_collection`；完整历史迁移需先核对目标 tip，授权强制更新使用 `--force-with-lease`。该规则覆盖三个关联项目的推送场景。
 - Validation: 主项目 Skill 通过 `quick_validate.py`；`git diff --check` 通过。
 - Next: 后续跨项目推送先核对目录后缀、远程地址和目标分支，再执行 dry-run。
+
+- Challenge: 把项目开工前的需求确认、接口检查和防返工流程沉淀为可复用的知识库入口。
+- Changes: 新增 `skills/common/project-start-checklist/`，包含开工门禁、项目要求记录模板、阶段检查规则和用户提供的 10 条标准提问模板，并加入硬件、软件和复盘专用检查。
+- Validation: `quick_validate.py`、`git diff --check`、引用路径检查通过；Skill 正文 58 行，配套模板和提问库共 139 行。
+- Next: 在各项目的 `.agents/skills/<项目名>/references/project-requirements.md` 中逐项补齐真实项目要求，缺失项确认前不开始实现。
