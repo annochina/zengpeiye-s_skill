@@ -63,3 +63,10 @@
 - Changes: 新增 `skills/common/feishu-software-docs/`，支持程序使用文档、功能表、模块说明、ROS/CLI 接口与部署说明；约束事实保真、命令和代码原样、未知状态标记为“待确认”、按内容选择章节并输出标准飞书友好 Markdown；新增 `agents/openai.yaml` 界面元数据。
 - Validation: `quick_validate.py` 通过；当前项目 `.agents/skills/common` 发现路径可见；Skill 252 行，未包含 TODO 占位；13 项触发、边界和七类输入场景标记覆盖检查通过；`openai.yaml` 元数据检查和目标文件 `git diff --check` 通过。
 - Next: 使用真实 README、ROS、CLI、信息不完整和已有 Markdown 样本进行一次端到端人工复核，再按反馈收敛触发边界。
+
+## 2026-09-04
+
+- Challenge: 为跨项目 Git 推送建立按目录后缀选择远程仓库的规则。
+- Changes: 更新主项目 Skill：`_delivery` 目录默认推送到 `naviai_delivery_push`，无 `_delivery` 后缀的目录默认推送到 `naviai_data_collection`；完整历史迁移需先核对目标 tip，授权强制更新使用 `--force-with-lease`。该规则覆盖三个关联项目的推送场景。
+- Validation: 主项目 Skill 通过 `quick_validate.py`；`git diff --check` 通过。
+- Next: 后续跨项目推送先核对目录后缀、远程地址和目标分支，再执行 dry-run。

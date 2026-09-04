@@ -29,6 +29,15 @@ description: 项目专属 Skill：维护 Naviai Manip Lerobot Cleaner Convert GU
 
 凭据不得写入仓库、日志、提交信息或命令输出。推荐在本机 `~/.ssh/config` 中配置上述 Host 别名并使用 SSH key；需要口令时通过本机私有凭据管理器或交互式输入提供。Skill、README 和脚本中只能保留主机别名、用户名和地址，不能保存口令。
 
+## GitLab 远程选择
+
+推送前根据当前仓库目录名选择地址，并先核对 `git remote -v`：
+
+- 目录名以 `_delivery` 结尾：推送到交付仓库 `naviai_delivery_push`，通常使用 `origin`。
+- 目录名不以 `_delivery` 结尾：推送到内部仓库 `naviai_data_collection`，通常使用 `production`。
+
+默认只推送到与目录后缀匹配的一个地址，不因 `origin` 是默认远程就推错仓库。只有用户明确要求迁移或双向同步时，才切换目标；迁移完整历史前先读取目标分支 tip，显式授权的强制更新使用 `--force-with-lease`，不使用盲目的 `--force`。
+
 常用连接形式：
 
 ```bash
