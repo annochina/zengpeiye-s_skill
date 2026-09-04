@@ -75,3 +75,7 @@
 - Changes: 新增 `skills/common/project-start-checklist/`，包含开工门禁、项目要求记录模板、阶段检查规则和用户提供的 10 条标准提问模板，并加入硬件、软件和复盘专用检查。
 - Validation: `quick_validate.py`、`git diff --check`、引用路径检查通过；Skill 正文 58 行，配套模板和提问库共 139 行。
 - Next: 在各项目的 `.agents/skills/<项目名>/references/project-requirements.md` 中逐项补齐真实项目要求，缺失项确认前不开始实现。
+- Challenge: 让项目 CHANGELOG 的每条新增记录都能对应明确的软件版本。
+- Changes: 更新通用 `changelog` Skill、Naviai Manip 项目 Skill 和项目仓库规则，要求新增记录使用 `vMAJOR.MINOR.PATCH` 版本标题；版本必须来自 tag、包发布配置或用户确认，历史无版本号记录不回写。
+- Validation: 目标 Skill 元数据和正文检查、`git diff --check` 通过。
+- Next: 后续项目变更先确认版本号，再写入带版本标题的 CHANGELOG 记录。
